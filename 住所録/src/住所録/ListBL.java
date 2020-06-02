@@ -1,0 +1,99 @@
+package 住所録;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ListBL
+ */
+public class ListBL extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ListBL() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		
+		Connection connect =null;
+    	ResultSet rs=null;
+    	
+    	String SerchName=request.getParameter("SerchName");
+
+        String user="root";
+        String password ="";
+        String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+
+		try {
+	        Class.forName("com.mysql.jdbc.Driver");
+	        connect=DriverManager.getConnection( url,user,password);
+	        //Statement stmt = connect.createStatement();
+	        System.out.println("接続おｋk");
+	        
+	        String SelectQuery = "SELECT id,name,address,tel,categoryname FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE is_deleted=true";
+	        PreparedStatement ps =connect.prepareStatement(SelectQuery);
+	        rs =ps.executeQuery();
+	        
+	        ArrayList<String> id =new ArrayList<String>();
+	        ArrayList<String> name =new ArrayList<String>();
+	        ArrayList<String> address =new ArrayList<String>();
+	        ArrayList<String> tel =new ArrayList<String>();
+	        ArrayList<String> categoryname =new ArrayList<String>();
+	        
+	        while(rs.next()) {
+	            
+	        	id.add(rs.getString("id"));
+		        name.add(rs.getString("name"));
+		        address.add(rs.getString("address"));
+		        tel.add(rs.getString("tel"));
+		        categoryname.add(rs.getString("categoryname"));
+	        	}
+	        
+	        request.setAttribute("id",id);
+        	request.setAttribute("name",name);
+        	request.setAttribute("address",address);
+        	request.setAttribute("tel",tel);
+        	request.setAttribute("categoryname",categoryname);
+        	
+        	RequestDispatcher rd =
+    		        request.getRequestDispatcher("/List.jsp");
+    		        rd.forward(request,response);
+    		        
+	        ps.close();
+
+		} catch(ClassNotFoundException e) {
+			System.out.println("クラスが見つかりません");
+		} catch (SQLException e) {
+			System.out.println("データ検索に失敗しました");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
