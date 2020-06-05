@@ -1,6 +1,7 @@
 package 住所録;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,9 +46,7 @@ public class AddBL extends HttpServlet {
         String address = request.getParameter("address");
         String tel =request.getParameter("tel");
         String categoryid=request.getParameter("categoryid");
-		String errmsg="";
-		String errrmsg="";
-		String errrrmsg="";
+        ArrayList<String> errmsg;
 		
 		Common deta =new Common();
 		
@@ -61,34 +60,32 @@ public class AddBL extends HttpServlet {
         tel=deta.GetTel();
         categoryid=deta.GetCategoryid();
         
-        errmsg=deta.getErr(name);
-        errrmsg=deta.getErrr(address);
-        errrrmsg=deta.getErrrr(tel);
+        errmsg=deta.getErr(name,address,tel);
+        
         
         //System.out.println(categoryid);
         
-        if(errmsg.length() != 0 || errrmsg.length() != 0 || errrrmsg.length() != 0) {
+        if(errmsg.isEmpty()) {
         	System.out.println(errmsg);
         	
         	request.setAttribute("name",name);
             request.setAttribute("address",address);
             request.setAttribute("tel",tel);
             request.setAttribute("categoryid",categoryid);
-            request.setAttribute("errmsg",errmsg);
-	        request.setAttribute("errrmsg",errrmsg);
-	        request.setAttribute("errrrmsg",errrrmsg);
+            //request.setAttribute("errmsg",errmsg);
             
             RequestDispatcher rd =
-            		request.getRequestDispatcher("/Add.jsp");
+            		request.getRequestDispatcher("/AddCheck.jsp");
             rd.forward(request,response);
         }else{
 		    request.setAttribute("name",name);
             request.setAttribute("address",address);
             request.setAttribute("tel",tel);
             request.setAttribute("categoryid",categoryid);
+            request.setAttribute("errmsg",errmsg);
 		
             RequestDispatcher rd =
-        		   request.getRequestDispatcher("/AddCheck.jsp");
+        		   request.getRequestDispatcher("/Add.jsp");
             rd.forward(request,response);
         }
 		

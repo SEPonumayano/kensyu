@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Common {
 	String ERRMSG_NAME01 ="名前は全角20文字以内で入力してください";
@@ -50,37 +51,25 @@ public class Common {
 		return this.categoryid;
 	}
 	
-	public String getErr(String name) {
-		String returnVal="";
+	public ArrayList<String> getErr(String name,String address,String tel) {
+		ArrayList<String> returnVal =new ArrayList<String>();
 		
 		if(this.name.length()>=20) {
-			returnVal=ERRMSG_NAME01;
+			returnVal.add(ERRMSG_NAME01);
 		}
 		if(this.name.isEmpty()) {
-			returnVal=ERRMSG_NAME02;
+			returnVal.add(ERRMSG_NAME02);
+		}
+		if(this.address.length()>=40) {
+			returnVal.add(ERRMSG_ADDRESS01);
+		}
+		if(this.address.isEmpty()) {
+			returnVal.add(ERRMSG_ADDRESS02);
+		}
+		if(this.tel.isEmpty()) {
+			returnVal.add(ERRMSG_TEL01);
 		}
 		return returnVal;
-	}
-		
-	public String getErrr(String address) {
-		String returnVall="";
-		if(this.address.length()>=40) {
-			returnVall=ERRMSG_ADDRESS01;
-		}
-		
-		
-		if(this.address.isEmpty()) {
-			returnVall=ERRMSG_ADDRESS02;
-		}
-		return returnVall;
-	}
-	
-	public String getErrrr(String tel) {
-		String returnValll="";
-		if(this.tel.isEmpty()) {
-			returnValll=ERRMSG_TEL01;
-		}
-		return returnValll;
 	}
 	
 	public ResultSet getCategoryAll() {

@@ -39,10 +39,8 @@ public class EditComitBL extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html; charset=UTF-8");
+		//response.setContentType("text/html; charset=UTF-8");
 		//PrintWriter out =response.getWriter();
-		request.setCharacterEncoding("UTF-8");
-
 		request.setCharacterEncoding("UTF-8");
 		String name =request.getParameter("name");
 		String address =request.getParameter("address");
@@ -63,8 +61,8 @@ public class EditComitBL extends HttpServlet {
 	        Statement st = con.createStatement();
 
 			st.executeUpdate("update jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel+"',categoryid='"+categoryid+"',is_deleted=true WHERE id='"+id+"'");
-		    System.out.println("テーブルを更新しました。<br>");
-		    System.out.println("name="+name+",address="+address+",tel="+tel+",categoryid="+categoryid+"");
+		    System.out.println("テーブルを更新しました。");
+		    //System.out.println("name="+name+",address="+address+",tel="+tel+",categoryid="+categoryid+"");
 
 		    RequestDispatcher rd =
 			        request.getRequestDispatcher("ListBL");

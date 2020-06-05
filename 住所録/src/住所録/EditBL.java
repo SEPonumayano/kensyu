@@ -1,6 +1,7 @@
 package 住所録;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,9 +42,7 @@ public class EditBL extends HttpServlet {
         String tel =request.getParameter("tel");
         String categoryid=request.getParameter("categoryid");
         String id = request.getParameter("id");
-		String errmsg="";
-		String errrmsg="";
-		String errrrmsg="";
+        ArrayList<String> errmsg;
 
 		Common deta =new Common();
 
@@ -55,21 +54,19 @@ public class EditBL extends HttpServlet {
         address=deta.GetAddress();
         tel=deta.GetTel();
 
-        errmsg=deta.getErr(name);
-        errrmsg=deta.getErrr(address);
-        errrrmsg=deta.getErrrr(tel);
+        errmsg=deta.getErr(name,address,tel);
 
-        if(errmsg.length() != 0 || errrmsg.length() != 0 || errrrmsg.length() != 0) {
+        if(errmsg.isEmpty()) {
         	System.out.println(errmsg);
 
         	request.setAttribute("name",name);
             request.setAttribute("address",address);
             request.setAttribute("tel",tel);
             request.setAttribute("categoryid",categoryid);
-            //ListBL作ったらコメントアウトとってrequest.setAttribute("id",id);
+            request.setAttribute("id",id);
 
             RequestDispatcher rd =
-            		request.getRequestDispatcher("/Edit.jsp");
+            		request.getRequestDispatcher("/EditCheck.jsp");
             rd.forward(request,response);
         }else{
 		    request.setAttribute("name",name);
@@ -77,10 +74,10 @@ public class EditBL extends HttpServlet {
             request.setAttribute("tel",tel);
             request.setAttribute("categoryid",categoryid);
             request.setAttribute("errmsg",errmsg);
-            request.setAttribute("id",id);
+            //request.setAttribute("id",id);
 
             RequestDispatcher rd =
-        		   request.getRequestDispatcher("/EditCheck.jsp");
+        		   request.getRequestDispatcher("/Edit.jsp");
             rd.forward(request,response);
         }
 

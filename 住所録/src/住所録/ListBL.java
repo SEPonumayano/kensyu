@@ -39,6 +39,23 @@ public class ListBL extends HttpServlet {
     	ResultSet rs=null;
     	
     	String SerchName=request.getParameter("SerchName");
+    	String Page=request.getParameter("Page");
+    	
+    	String nowPage="";
+    	if(Page != null) {
+    		nowPage=Page;
+    	}else {
+    		nowPage="1";
+    	}
+    	System.out.println(nowPage+"ページ目");
+    	
+    	int now= Integer.parseInt(nowPage);
+    	System.out.println(now);
+    	int limitSta= (now-1)*10;
+    	
+    	if(SerchName == null) {
+    		SerchName="";
+    	}
 
         String user="root";
         String password ="";
@@ -50,8 +67,19 @@ public class ListBL extends HttpServlet {
 	        //Statement stmt = connect.createStatement();
 	        System.out.println("接続おｋk");
 	        
-	        String SelectQuery = "SELECT id,name,address,tel,categoryname FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE is_deleted=true";
-	        PreparedStatement ps =connect.prepareStatement(SelectQuery);
+	        //件数確認
+	        String CntQuery="SELECT COUNT(*)FROM testdb.jyusyoroku WHERE is_deleted=true";
+	        PreparedStatement ps =connect.prepareStatement(CntQuery);
+	        rs =ps.executeQuery();
+	        
+	        rs.next();
+	        int listCnt=rs.getInt(1);
+	        
+	        System.out.println(rs.getInt(1)+"件あります");
+	        
+	        String SelectQuery = "SELECT * FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE is_deleted=true AND address like ? LIMIT 10 OFFSET "+limitSta+"";
+	        ps =connect.prepareStatement(SelectQuery);
+	        ps.setString(1,"%"+ SerchName +"%");
 	        rs =ps.executeQuery();
 	        
 	        ArrayList<String> id =new ArrayList<String>();
@@ -74,6 +102,11 @@ public class ListBL extends HttpServlet {
         	request.setAttribute("address",address);
         	request.setAttribute("tel",tel);
         	request.setAttribute("categoryname",categoryname);
+        	
+        	String listC=String.valueOf(listCnt);
+        	String noww=String.valueOf(now);
+        	request.setAttribute("listC",listC);
+        	request.setAttribute("noww",noww);
         	
         	RequestDispatcher rd =
     		        request.getRequestDispatcher("/List.jsp");

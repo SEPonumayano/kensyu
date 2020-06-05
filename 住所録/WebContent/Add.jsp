@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="住所録.Common" import="java.sql.ResultSet"%>
+    pageEncoding="UTF-8" import="住所録.Common" import="java.sql.ResultSet" import="java.util.List" import="java.util.Arrays" import="java.util.ArrayList"%>
 <%
 request.setCharacterEncoding("UTF-8");
-String errmsg =(String) request.getAttribute("errmsg");
-String errrmsg =(String) request.getAttribute("errrmsg");
-String errrrmsg =(String) request.getAttribute("errrrmsg");
+List<String> errmsg =(List<String>) request.getAttribute("errmsg");
+
 Common de =new Common();
 ResultSet rs=null;
 rs=de.getCategoryAll();
@@ -22,17 +21,15 @@ rs=de.getCategoryAll();
 住所*：<input name="address" type="text" value="" /><br/>
 電話番号：<input name="tel" type="tel" maxlength="11" value=""/><br/>
 カテゴリー：<select name="categoryid">
-<option value="0">  </option>
 <%
 while(rs.next()){
 %>
 <option value="<%=rs.getString("categoryid")%>"><%=rs.getString("categoryname")%></option>
 <%} %>
 </select><br/>
+<%if(errmsg != null){ %>
 <%=errmsg%><br/>
-<%=errrmsg%><br/>
-<%=errrrmsg%><br/>
-
+<%} %>
 <input type="submit" value="確認"/>
 <button type="button" onclick="history.back();">戻る</button>
 </form>

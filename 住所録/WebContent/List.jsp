@@ -7,6 +7,16 @@ List<String> address =(List<String>) request.getAttribute("address");
 List<String> tel =(List<String>) request.getAttribute("tel");
 List<String> categoryname =(List<String>) request.getAttribute("categoryname");
 
+String listCnt =(String) request.getAttribute("listC"); 
+String nowPage =(String) request.getAttribute("noww");
+int listC= Integer.parseInt(listCnt);
+int now= Integer.parseInt(nowPage);
+
+int maxPage=listC/10;
+
+if(maxPage%10 !=0){
+	maxPage=maxPage+1;
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +34,18 @@ List<String> categoryname =(List<String>) request.getAttribute("categoryname");
 <input name="SerchName" type="text" value="" />
 <input type="submit" value="検索" />
 </form>
+<br/>
+<a href="ListBL?Page=1"><%="<<"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
+<%
+  for(int j=1;j<=maxPage;j++){
+%>
+<a href="ListBL?Page=<%=j%>"><%=j%></a>
+<%
+}
+%>
+<a href="ListBL?Page=<%=now+1%>"><%=">"%></a>
+<a href="ListBL?Page=<%=maxPage%>"><%=">>"%></a>
 <br/>
 <table border="1">
 <tr>
@@ -53,6 +75,17 @@ List<String> categoryname =(List<String>) request.getAttribute("categoryname");
   }
 %>
 </table>
+<a href="ListBL?Page=1"><%="<<"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
+<%
+  for(int j=1;j<=maxPage;j++){
+%>
+<a href="ListBL?Page=<%=j%>"><%=j%></a>
+<%
+}
+%>
+<a href="ListBL?Page=<%=now+1%>"><%=">"%></a>
+<a href="ListBL?Page=<%=maxPage%>"><%=">>"%></a>
 <form action="Add.jsp" method="get">
 <input type="submit" value="新規登録" />
 </form>
