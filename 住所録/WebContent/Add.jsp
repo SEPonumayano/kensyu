@@ -19,7 +19,7 @@ rs=de.getCategoryAll();
 住所録管理システム：住所録登録<br/><br/>
 名前*：<input name="name" type="text" value="" /><br/>
 住所*：<input name="address" type="text" value="" /><br/>
-電話番号：<input name="tel" type="tel" maxlength="11" value=""/><br/>
+電話番号：<input name="tel" type="tel" maxlength="13" value=""/><br/>
 カテゴリー：<select name="categoryid">
 <%
 while(rs.next()){

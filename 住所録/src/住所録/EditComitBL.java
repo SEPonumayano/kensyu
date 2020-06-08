@@ -48,6 +48,8 @@ public class EditComitBL extends HttpServlet {
 		String categoryid=request.getParameter("categoryid");
 		String id = request.getParameter("id");
 
+		//telの「-」とる
+
 		Connection con =null;
 
 		try {

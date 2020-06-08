@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Common {
 	String ERRMSG_NAME01 ="名前は全角20文字以内で入力してください";
@@ -66,7 +68,12 @@ public class Common {
 		if(this.address.isEmpty()) {
 			returnVal.add(ERRMSG_ADDRESS02);
 		}
-		if(this.tel.isEmpty()) {
+		//if(this.tel.isEmpty()) {
+			//returnVal.add(ERRMSG_TEL01);
+		//}
+		Pattern p =Pattern.compile("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
+		Matcher m =p.matcher(tel);
+		if(this.tel.isEmpty() || m.find()==false) {
 			returnVal.add(ERRMSG_TEL01);
 		}
 		return returnVal;

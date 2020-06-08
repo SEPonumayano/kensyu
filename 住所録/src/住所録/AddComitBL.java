@@ -55,6 +55,8 @@ public class AddComitBL extends HttpServlet {
 		String tel=request.getParameter("tel");
 		String categoryid=request.getParameter("categoryid");
 
+		//telの「-」とる
+
 		Connection con =null;
 
 		try {
