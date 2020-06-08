@@ -12,11 +12,12 @@ rs=de.getCategoryAll();
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="NewFile.css">
 <title>住所録登録</title>
 </head>
 <body>
 <form action="AddBL" method="post">
-住所録管理システム：住所録登録<br/><br/>
+<h1>住所録管理システム：住所録登録</h1><br/><br/>
 名前*：<input name="name" type="text" value="" /><br/>
 住所*：<input name="address" type="text" value="" /><br/>
 電話番号：<input name="tel" type="tel" maxlength="13" value=""/><br/>

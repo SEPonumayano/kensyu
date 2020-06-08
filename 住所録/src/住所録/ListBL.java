@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -68,7 +70,8 @@ public class ListBL extends HttpServlet {
 	        System.out.println("接続おｋk");
 	        
 	        //件数確認
-	        String CntQuery="SELECT COUNT(*)FROM testdb.jyusyoroku WHERE is_deleted=true";
+	        //String CntQuery="SELECT COUNT(*)FROM testdb.jyusyoroku WHERE is_deleted=true";
+	        String CntQuery="SELECT COUNT(*)FROM onuma.jyusyoroku WHERE is_deleted=true";
 	        PreparedStatement ps =connect.prepareStatement(CntQuery);
 	        rs =ps.executeQuery();
 	        
@@ -77,7 +80,8 @@ public class ListBL extends HttpServlet {
 	        
 	        System.out.println(rs.getInt(1)+"件あります");
 	        
-	        String SelectQuery = "SELECT * FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE is_deleted=true AND address like ? LIMIT 10 OFFSET "+limitSta+"";
+	        //String SelectQuery = "SELECT * FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE is_deleted=true AND address like ? LIMIT 10 OFFSET "+limitSta+"";
+	        String SelectQuery = "SELECT * FROM onuma.jyusyoroku JOIN onuma.category ON onuma.jyusyoroku.categoryid=onuma.category.categoryid WHERE is_deleted=true AND address like ? LIMIT 10 OFFSET "+limitSta+"";
 	        ps =connect.prepareStatement(SelectQuery);
 	        ps.setString(1,"%"+ SerchName +"%");
 	        rs =ps.executeQuery();
@@ -87,21 +91,35 @@ public class ListBL extends HttpServlet {
 	        ArrayList<String> address =new ArrayList<String>();
 	        ArrayList<String> tel =new ArrayList<String>();
 	        ArrayList<String> categoryname =new ArrayList<String>();
+	        ArrayList<String> categoryid =new ArrayList<String>();
+	        
 	        
 	        while(rs.next()) {
 	            
 	        	id.add(rs.getString("id"));
 		        name.add(rs.getString("name"));
 		        address.add(rs.getString("address"));
-		        tel.add(rs.getString("tel"));
+		        
+		        //"-"入れる
+		        Pattern p = Pattern.compile("(\\d{3})(\\d{4})(\\d{4})");
+		        Matcher m =p.matcher(rs.getString("tel"));
+		        String tel1=m.replaceAll("$1-$2-$3");
+		        tel.add(tel1);
+		        //tel.add(rs.getString("tel"));
+		        
 		        categoryname.add(rs.getString("categoryname"));
+		        categoryid.add(rs.getString("categoryid"));
+		        
 	        	}
+	        
+	        System.out.println(id);
 	        
 	        request.setAttribute("id",id);
         	request.setAttribute("name",name);
         	request.setAttribute("address",address);
         	request.setAttribute("tel",tel);
         	request.setAttribute("categoryname",categoryname);
+        	request.setAttribute("categoryid",categoryid);
         	
         	String listC=String.valueOf(listCnt);
         	String noww=String.valueOf(now);

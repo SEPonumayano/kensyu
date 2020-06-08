@@ -49,6 +49,8 @@ public class EditComitBL extends HttpServlet {
 		String id = request.getParameter("id");
 
 		//telの「-」とる
+		String tel1=tel.replace("-","");
+		System.out.println(tel1);
 
 		Connection con =null;
 
@@ -62,9 +64,10 @@ public class EditComitBL extends HttpServlet {
 	        con=DriverManager.getConnection( url,user,password);
 	        Statement st = con.createStatement();
 
-			st.executeUpdate("update jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel+"',categoryid='"+categoryid+"',is_deleted=true WHERE id='"+id+"'");
+			//st.executeUpdate("update jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel+"',categoryid='"+categoryid+"',is_deleted=true WHERE id='"+id+"'");
+			st.executeUpdate("update onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',is_deleted=true WHERE id='"+id+"'");
 		    System.out.println("テーブルを更新しました。");
-		    //System.out.println("name="+name+",address="+address+",tel="+tel+",categoryid="+categoryid+"");
+		    
 
 		    RequestDispatcher rd =
 			        request.getRequestDispatcher("ListBL");

@@ -68,9 +68,6 @@ public class Common {
 		if(this.address.isEmpty()) {
 			returnVal.add(ERRMSG_ADDRESS02);
 		}
-		//if(this.tel.isEmpty()) {
-			//returnVal.add(ERRMSG_TEL01);
-		//}
 		Pattern p =Pattern.compile("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
 		Matcher m =p.matcher(tel);
 		if(this.tel.isEmpty() || m.find()==false) {
@@ -93,7 +90,8 @@ public class Common {
 	        Statement stmt = connect.createStatement();
 	        System.out.println("接続おｋ");
 
-	        String getQuery = "SELECT * FROM testdb.catego";
+	       // String getQuery = "SELECT * FROM testdb.catego";
+	        String getQuery = "SELECT * FROM onuma.category";
 	        //PreparedStatement ps =connect.prepareStatement(getQuery);
 	        rs =stmt.executeQuery(getQuery);
 	        //ps.close();
@@ -124,7 +122,8 @@ public class Common {
 	        
 	        String keyword=this.categoryid;
 	        
-	        String getQuery = "SELECT categoryname FROM testdb.catego WHERE categoryid IN('"+keyword+"')";
+	        //String getQuery = "SELECT categoryname FROM testdb.catego WHERE categoryid IN('"+keyword+"')";
+	        String getQuery = "SELECT categoryname FROM onuma.category WHERE categoryid IN('"+keyword+"')";
 	        PreparedStatement ps =connect.prepareStatement(getQuery);
 	        rs =ps.executeQuery();
 	        rs.next();

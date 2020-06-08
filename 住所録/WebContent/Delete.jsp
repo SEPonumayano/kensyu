@@ -23,7 +23,7 @@ try {
     Statement stmt = connect.createStatement();
     System.out.println("接続おｋ");
 
-    String getQuery = "SELECT * FROM testdb.jyusyoroku where id='"+id+"'";
+    String getQuery = "SELECT * FROM onuma.jyusyoroku where id='"+id+"'";
     PreparedStatement ps =connect.prepareStatement(getQuery);
     rs =ps.executeQuery();
 

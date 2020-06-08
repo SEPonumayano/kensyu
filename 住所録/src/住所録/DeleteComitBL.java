@@ -58,7 +58,8 @@ public class DeleteComitBL extends HttpServlet {
 	        con=DriverManager.getConnection( url,user,password);
 	        Statement st = con.createStatement();
 
-			st.executeUpdate("update jyusyoroku SET is_deleted=false where id='"+id+"'");
+			//st.executeUpdate("update jyusyoroku SET is_deleted=false where id='"+id+"'");
+			st.executeUpdate("update onuma.jyusyoroku SET is_deleted=false where id='"+id+"'");
 		    System.out.println("テーブルを消去しました。<br>");
 
 		    RequestDispatcher rd =

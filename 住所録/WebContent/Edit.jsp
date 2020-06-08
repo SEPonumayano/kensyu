@@ -3,6 +3,12 @@
 <%
 request.setCharacterEncoding("UTF-8");
 String id=(String)request.getAttribute("id");
+String name=(String)request.getAttribute("name");
+String address=(String)request.getAttribute("address");
+String tel=(String)request.getAttribute("tel");
+String categoryname=(String)request.getAttribute("categoryname");
+String categoryid=(String)request.getAttribute("categoryid");
+
 List<String> errmsg =(List<String>) request.getAttribute("errmsg");
 Common dee =new Common();
 ResultSet rs=null;
@@ -19,7 +25,7 @@ rs=dee.getCategoryAll();
 住所録管理システム：住所録編集<br/><br/>
 名前*：<input name="name" type="text" value="" /><br/>
 住所*：<input name="address" type="text" value="" /><br/>
-電話番号：<input name="tel" type="tel" maxlength="11" value=""/><br/>
+電話番号：<input name="tel" type="tel" maxlength="13" value=""/><br/>
 カテゴリー：<select name="categoryid">
 <%
 while(rs.next()){

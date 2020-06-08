@@ -61,9 +61,7 @@ public class AddBL extends HttpServlet {
         categoryid=deta.GetCategoryid();
         
         errmsg=deta.getErr(name,address,tel);
-        
-        
-        //System.out.println(categoryid);
+
         
         if(errmsg.isEmpty()) {
         	System.out.println(errmsg);
