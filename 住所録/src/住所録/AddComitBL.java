@@ -69,12 +69,13 @@ public class AddComitBL extends HttpServlet {
 
 	        Class.forName("com.mysql.jdbc.Driver");
 	        con=DriverManager.getConnection( url,user,password);
-	        Statement st = con.createStatement();
+	        Statement stmt = con.createStatement();
 		    System.out.println("接続したよ");
-	        
 
-			//st.executeUpdate("INSERT jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',is_deleted=true");
-			st.executeUpdate("INSERT onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',is_deleted=true");
+
+			String InsQuery="INSERT jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0";
+		    //String InsQuery="INSERT onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0";
+			stmt.executeUpdate(InsQuery);
 		    System.out.println("テーブルを登録しました。<br>");
 		    System.out.println("name="+name+",address="+address+",tel="+tel1+",categoryid="+categoryid+"");
 

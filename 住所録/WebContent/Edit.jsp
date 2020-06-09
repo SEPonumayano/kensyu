@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"  import="住所録.Common" import="java.sql.ResultSet" import="java.util.List" import="java.util.Arrays" import="java.util.ArrayList"%>
 <%
 request.setCharacterEncoding("UTF-8");
-String id=(String)request.getAttribute("id");
-String name=(String)request.getAttribute("name");
-String address=(String)request.getAttribute("address");
-String tel=(String)request.getAttribute("tel");
-String categoryname=(String)request.getAttribute("categoryname");
-String categoryid=(String)request.getAttribute("categoryid");
+String id=request.getParameter("id");
+String name=(String)request.getParameter("name");
+String address=(String)request.getParameter("address");
+String tel=(String)request.getParameter("tel");
+String categoryname=(String)request.getParameter("categoryname");
+String categoryid=(String)request.getParameter("categoryid");
 
 List<String> errmsg =(List<String>) request.getAttribute("errmsg");
 Common dee =new Common();
@@ -18,15 +18,16 @@ rs=dee.getCategoryAll();
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="NewFile.css">
 <title>住所録編集</title>
 </head>
 <body>
 <form action="EditBL" method="post">
 住所録管理システム：住所録編集<br/><br/>
-名前*：<input name="name" type="text" value="" /><br/>
-住所*：<input name="address" type="text" value="" /><br/>
-電話番号：<input name="tel" type="tel" maxlength="13" value=""/><br/>
-カテゴリー：<select name="categoryid">
+名前*：<input name="name" type="text" value=<%=name %> ><br/>
+住所*：<input name="address" type="text" value=<%=address %> ><br/>
+電話番号：<input name="tel" type="tel" maxlength="13" value=<%=tel %>><br/>
+カテゴリー：<select name="categoryid" >
 <%
 while(rs.next()){
 %>
@@ -38,7 +39,7 @@ while(rs.next()){
 <%} %>
 <INPUT name="id" type="hidden" value=<%=id%>>
 <input type="submit" value="確認"/>
-<button type="button" onclick="history.back();">戻る</button>
+<button type="submit" formaction="ListBL">戻る</button>
 </form>
 </body>
 </html>

@@ -62,12 +62,13 @@ public class EditComitBL extends HttpServlet {
 
 	        Class.forName("com.mysql.jdbc.Driver");
 	        con=DriverManager.getConnection( url,user,password);
-	        Statement st = con.createStatement();
+	        Statement stmt = con.createStatement();
 
-			//st.executeUpdate("update jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel+"',categoryid='"+categoryid+"',is_deleted=true WHERE id='"+id+"'");
-			st.executeUpdate("update onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',is_deleted=true WHERE id='"+id+"'");
+	        String UpdQuery="update testdb.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0 WHERE id='"+id+"'";
+	        //String UpdQuery="update onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=1 WHERE id='"+id+"'";
+	        stmt.executeUpdate(UpdQuery);
 		    System.out.println("テーブルを更新しました。");
-		    
+
 
 		    RequestDispatcher rd =
 			        request.getRequestDispatcher("ListBL");

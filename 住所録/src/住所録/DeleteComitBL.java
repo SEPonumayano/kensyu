@@ -56,10 +56,11 @@ public class DeleteComitBL extends HttpServlet {
 
 	        Class.forName("com.mysql.jdbc.Driver");
 	        con=DriverManager.getConnection( url,user,password);
-	        Statement st = con.createStatement();
+	        Statement stmt = con.createStatement();
 
-			//st.executeUpdate("update jyusyoroku SET is_deleted=false where id='"+id+"'");
-			st.executeUpdate("update onuma.jyusyoroku SET is_deleted=false where id='"+id+"'");
+			String UpdQuery="update jyusyoroku SET delete_flg=1 where id='"+id+"'";
+			//String UpdQuery="update onuma.jyusyoroku SET delete_flg=1 where id='"+id+"'"
+	        stmt.executeUpdate(UpdQuery);
 		    System.out.println("テーブルを消去しました。<br>");
 
 		    RequestDispatcher rd =

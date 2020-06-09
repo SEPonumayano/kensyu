@@ -19,6 +19,7 @@ String categoryname=dd.getCategoryName();
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="NewFile.css">
 <title>住所録登録確認</title>
 </head>
 <body>
@@ -33,7 +34,7 @@ String categoryname=dd.getCategoryName();
 <INPUT name="tel" type="hidden" value=<%=tel%>>
 <INPUT name="categoryid" type="hidden" value=<%=categoryid%>>
 <input type="submit" value="完了"/>
-<button type="button" onclick="history.back();">戻る</button>
+<button type="submit" formaction="Add.jsp">戻る</button>
 </form>
 
 </body>

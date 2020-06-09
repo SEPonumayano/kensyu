@@ -19,6 +19,7 @@ String categoryname=aa.getCategoryName();
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="NewFile.css">
 <title>住所録編集確認</title>
 </head>
 <body>
@@ -34,7 +35,7 @@ String categoryname=aa.getCategoryName();
 <INPUT name="categoryid" type="hidden" value=<%=categoryid%>>
 <INPUT name="id" type="hidden" value=<%=id%>>
 <input type="submit" value="完了"/>
-<button type="button" onclick="history.back();">戻る</button>
+<button type="submit" formaction="Edit.jsp">戻る</button>
 </form>
 </body>
 </html>

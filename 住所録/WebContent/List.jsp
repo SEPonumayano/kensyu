@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List" import="java.util.Arrays" import="java.util.ArrayList" %>
+    pageEncoding="UTF-8" import="java.util.List" import="java.util.Arrays" import="java.util.ArrayList" import="java.sql.*" import="java.util.regex.Matcher" import="java.util.regex.Pattern"%>
 <%
-List<String> id =(List<String>) request.getAttribute("id");
-List<String> name =(List<String>) request.getAttribute("name");
-List<String> address =(List<String>) request.getAttribute("address");
-List<String> tel =(List<String>) request.getAttribute("tel");
-List<String> categoryname =(List<String>) request.getAttribute("categoryname");
-List<String> categoryid =(List<String>) request.getAttribute("categoryid");
-
 String listCnt =(String) request.getAttribute("listC");
 String nowPage =(String) request.getAttribute("noww");
 int listC= Integer.parseInt(listCnt);
@@ -18,6 +11,8 @@ int maxPage=listC/10;
 if(maxPage%10 !=0){
 	maxPage=maxPage+1;
 }
+
+ResultSet rs= (ResultSet) request.getAttribute("rs");
 %>
 <!DOCTYPE html>
 <html>
@@ -60,26 +55,28 @@ if(maxPage%10 !=0){
 <th>カテゴリ</th>
 </tr>
 <%
-  for(int i=0;i<id.size();i++){
+while(rs.next()){
 %>
-<form name="<%=i+1 %>" method="post">
+<form name="<%=rs.getString("id")%>" method="post" accept-charset="UTF-8">
 <tr>
-<td><%=i+1 %></td>
-<td><%=name.get(i) %></td>
-<td><%=address.get(i) %></td>
-<td><%=tel.get(i) %></td>
-<td><%=categoryname.get(i) %></td>
-<INPUT name="id" type="hidden" value=<%=id.get(i)%>>
-<INPUT name="name" type="hidden" value=<%=name.get(i)%>>
-<INPUT name="address" type="hidden" value=<%=address.get(i)%>>
-<INPUT name="categoryid" type="hidden" value=<%=categoryid.get(i)%>>
-<!--
+<td><%=rs.getRow()+(now - 1) * 10%></td>
+<td><%=rs.getString("name")%></td>
+<td><%=rs.getString("address")%></td>
+<%
+Pattern p = Pattern.compile("(\\d{3})(\\d{4})(\\d{4})");
+Matcher m = p.matcher(rs.getString("tel"));
+String tel1 = m.replaceAll("$1-$2-$3");
+%>
+<td><%=tel1%></td>
+<td><%=rs.getString("categoryname")%></td>
+<INPUT name="id" type="hidden" value=<%=rs.getString("id")%>>
+<INPUT name="name" type="hidden" value=<%=rs.getString("name")%>>
+<INPUT name="tel" type="hidden" value=<%=tel1%>>
+<INPUT name="address" type="hidden" value=<%=rs.getString("address")%>>
+<INPUT name="categoryid" type="hidden" value=<%=rs.getString("categoryid")%>>
+
 <td><button type="submit" formaction="Edit.jsp">編集</button></td>
 <td><button type="submit" formaction="Delete.jsp">削除</button></td>
- -->
- <td><INPUT type="submit" formaction="Edit.jsp">編集</td>
- <td><INPUT type="submit" formaction="Delete.jsp">削除</td>
-
 </tr>
 </form>
 
@@ -90,7 +87,7 @@ if(maxPage%10 !=0){
 <a href="ListBL?Page=1"><%="<<"%></a>
 <a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
 <%
-  for(int j=1;j<=maxPage;j++){
+  for(int j=1;j<maxPage;j++){
 %>
 <a href="ListBL?Page=<%=j%>"><%=j%></a>
 <%

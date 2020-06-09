@@ -16,46 +16,46 @@ public class Common {
 	String ERRMSG_ADDRESS01 ="住所は全角40文字以内で入力してください";
 	String ERRMSG_ADDRESS02 ="住所は必須項目です";
 	String ERRMSG_TEL01 ="電話番号は「000-0000-0000」の形式で入力してください";
-	
+
 	String name ;
 	String address;
 	String tel;
 	String categoryid;
-	
-	
+
+
 	public void SetName(String name){
 		this.name=name;
 	}
 	public void SetAddress(String address) {
 		this.address=address;
 	}
-	
+
 	public void SetTel(String tel) {
 		this.tel=tel;
 	}
-	
+
 	public String GetName(){
 		return this.name;
 	}
-	
+
 	public String GetAddress() {
 		return this.address;
 	}
-	
+
 	public String GetTel() {
 		return this.tel;
 	}
-	
+
 	public void SetCategoryid(String categoryid) {
 		this.categoryid=categoryid;
 	}
 	public String GetCategoryid() {
 		return this.categoryid;
 	}
-	
+
 	public ArrayList<String> getErr(String name,String address,String tel) {
 		ArrayList<String> returnVal =new ArrayList<String>();
-		
+
 		if(this.name.length()>=20) {
 			returnVal.add(ERRMSG_NAME01);
 		}
@@ -75,7 +75,7 @@ public class Common {
 		}
 		return returnVal;
 	}
-	
+
 	public ResultSet getCategoryAll() {
         Connection connect =null;
         ResultSet rs=null;
@@ -90,8 +90,8 @@ public class Common {
 	        Statement stmt = connect.createStatement();
 	        System.out.println("接続おｋ");
 
-	       // String getQuery = "SELECT * FROM testdb.catego";
-	        String getQuery = "SELECT * FROM onuma.category";
+	        String getQuery = "SELECT * FROM testdb.catego";
+	        //String getQuery = "SELECT * FROM onuma.category";
 	        //PreparedStatement ps =connect.prepareStatement(getQuery);
 	        rs =stmt.executeQuery(getQuery);
 	        //ps.close();
@@ -104,7 +104,7 @@ public class Common {
 		return rs;
 	}
 
-	
+
 	public String getCategoryName() {
     	Connection connect =null;
     	ResultSet rs=null;
@@ -119,11 +119,11 @@ public class Common {
 	        connect=DriverManager.getConnection( url,user,password);
 	        //Statement stmt = connect.createStatement();
 	        System.out.println("接続おｋk");
-	        
+
 	        String keyword=this.categoryid;
-	        
-	        //String getQuery = "SELECT categoryname FROM testdb.catego WHERE categoryid IN('"+keyword+"')";
-	        String getQuery = "SELECT categoryname FROM onuma.category WHERE categoryid IN('"+keyword+"')";
+
+	        String getQuery = "SELECT categoryname FROM testdb.catego WHERE categoryid IN('"+keyword+"')";
+	        //String getQuery = "SELECT categoryname FROM onuma.category WHERE categoryid IN('"+keyword+"')";
 	        PreparedStatement ps =connect.prepareStatement(getQuery);
 	        rs =ps.executeQuery();
 	        rs.next();
@@ -143,5 +143,5 @@ public class Common {
 
 
 
-		
+
 
