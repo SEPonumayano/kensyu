@@ -87,7 +87,7 @@ String tel1 = m.replaceAll("$1-$2-$3");
 <a href="ListBL?Page=1"><%="<<"%></a>
 <a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
 <%
-  for(int j=1;j<maxPage;j++){
+  for(int j=1;j<=maxPage;j++){
 %>
 <a href="ListBL?Page=<%=j%>"><%=j%></a>
 <%
