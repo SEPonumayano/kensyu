@@ -5,9 +5,10 @@ body{
 }
 
 h1{
-	font-size:15px;
+	font-size:10px;
+	color:#ff6c94;
 }
 
 .item{
-	
+	color:orange;
 }

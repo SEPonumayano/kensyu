@@ -40,6 +40,7 @@ public class ListBL extends HttpServlet {
 
 		String SerchName = request.getParameter("SerchName");
 		String Page = request.getParameter("Page");
+		System.out.println(Page);
 
 		String nowPage = "";
 		if (Page != null) {
@@ -69,7 +70,7 @@ public class ListBL extends HttpServlet {
 
 			//件数確認
 			String CntQuery = "SELECT COUNT(*)FROM testdb.jyusyoroku WHERE delete_flg=0 AND address like ?";
-			//String CntQuery="SELECT COUNT(*)FROM onuma.jyusyoroku WHERE delete_flg=0";
+			//String CntQuery="SELECT COUNT(*)FROM onuma.jyusyoroku WHERE delete_flg=0" AND address like ?;
 			PreparedStatement ps = connect.prepareStatement(CntQuery);
 			ps.setString(1, "%" + SerchName + "%");
 			rs = ps.executeQuery();
@@ -79,8 +80,7 @@ public class ListBL extends HttpServlet {
 
 			System.out.println(rs.getInt(1) + "件あります");
 
-			String SelectQuery = "SELECT * FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE delete_flg=0 AND address like ? LIMIT 10 OFFSET "
-					+ limitSta + "";
+			String SelectQuery = "SELECT * FROM testdb.jyusyoroku JOIN testdb.catego ON testdb.jyusyoroku.categoryid=testdb.catego.categoryid WHERE delete_flg=0 AND address like ? LIMIT 10 OFFSET "+limitSta+"";
 			//String SelectQuery = "SELECT * FROM onuma.jyusyoroku JOIN onuma.category ON onuma.jyusyoroku.categoryid=onuma.category.categoryid WHERE delete_flg=0 AND address like ? LIMIT 10 OFFSET "+limitSta+"";
 			ps = connect.prepareStatement(SelectQuery);
 			ps.setString(1, "%" + SerchName + "%");
@@ -88,8 +88,8 @@ public class ListBL extends HttpServlet {
 
 			String listC = String.valueOf(listCnt);
 			String noww = String.valueOf(now);
-			request.setAttribute("listC", listC);
-			request.setAttribute("noww", noww);
+			request.setAttribute("listCnt", listC);
+			request.setAttribute("page", noww);
 			request.setAttribute("rs", rs);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/List.jsp");

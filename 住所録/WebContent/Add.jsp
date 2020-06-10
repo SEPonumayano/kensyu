@@ -12,7 +12,7 @@ rs=de.getCategoryAll();
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="NewFile.css">
+<link rel="stylesheet" href="/NewFile.css" type="text/css">
 <title>住所録登録</title>
 </head>
 <body>

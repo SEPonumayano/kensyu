@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List" import="java.util.Arrays" import="java.util.ArrayList" import="java.sql.*" import="java.util.regex.Matcher" import="java.util.regex.Pattern"%>
 <%
-String listCnt =(String) request.getAttribute("listC");
-String nowPage =(String) request.getAttribute("noww");
+String listCnt =(String) request.getAttribute("listCnt");
+String nowPage =(String) request.getAttribute("page");
 int listC= Integer.parseInt(listCnt);
 int now= Integer.parseInt(nowPage);
 
@@ -19,7 +19,7 @@ ResultSet rs= (ResultSet) request.getAttribute("rs");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="NewFile.css">
-<title>Insert title here</title>
+<title>住所録一覧</title>
 </head>
 <body>
 <h1>住所録管理システム：住所録一覧</h1><br/>
@@ -84,6 +84,7 @@ String tel1 = m.replaceAll("$1-$2-$3");
   }
 %>
 </table>
+<form action="ListBL" method="get">
 <a href="ListBL?Page=1"><%="<<"%></a>
 <a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
 <%
@@ -95,6 +96,7 @@ String tel1 = m.replaceAll("$1-$2-$3");
 %>
 <a href="ListBL?Page=<%=now+1%>"><%=">"%></a>
 <a href="ListBL?Page=<%=maxPage%>"><%=">>"%></a>
+</form>
 <form action="Add.jsp" method="get">
 <input type="submit" value="新規登録" />
 </form>
