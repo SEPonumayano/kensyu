@@ -26,11 +26,11 @@ rs=dee.getCategoryAll();
 <form  class="item" action="EditBL" method="post">
 <dl>
 <dt>名前*：</dt>
-<dd><input name="name" type="text" value=<%=name %> ></dd>
+<dd><input name="name" type="text" value=<%=name %> style="width:150px"></dd>
 <dt>住所*：</dt>
-<dd><input name="address" type="text" value=<%=address %> ></dd>
+<dd><input name="address" type="text" value=<%=address %> style="width:300px"></dd>
 <dt>電話番号：</dt>
-<dd><input name="tel" type="tel" maxlength="13" value=<%=tel %>></dd>
+<dd><input name="tel" type="tel" maxlength="13" value=<%=tel %> style="width:150px"></dd>
 <dt>カテゴリー：</dt>
 <dd><select name="categoryid" >
 <%
