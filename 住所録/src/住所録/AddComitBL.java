@@ -64,7 +64,8 @@ public class AddComitBL extends HttpServlet {
 		try {
 			String user="root";
 	        String password ="";
-	        String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+	        //String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+	        String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
 
 
 	        Class.forName("com.mysql.jdbc.Driver");
@@ -73,8 +74,8 @@ public class AddComitBL extends HttpServlet {
 		    System.out.println("接続したよ");
 
 
-			String InsQuery="INSERT jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0";
-		    //String InsQuery="INSERT onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0";
+			//String InsQuery="INSERT jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0";
+		    String InsQuery="INSERT onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0";
 			stmt.executeUpdate(InsQuery);
 		    System.out.println("テーブルを登録しました。<br>");
 		    System.out.println("name="+name+",address="+address+",tel="+tel1+",categoryid="+categoryid+"");

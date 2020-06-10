@@ -22,24 +22,32 @@ rs=dee.getCategoryAll();
 <title>住所録編集</title>
 </head>
 <body>
-<form action="EditBL" method="post">
-住所録管理システム：住所録編集<br/><br/>
-名前*：<input name="name" type="text" value=<%=name %> ><br/>
-住所*：<input name="address" type="text" value=<%=address %> ><br/>
-電話番号：<input name="tel" type="tel" maxlength="13" value=<%=tel %>><br/>
-カテゴリー：<select name="categoryid" >
+<p>住所録管理システム：住所録編集</p>
+<form  class="item" action="EditBL" method="post">
+<dl>
+<dt>名前*：</dt>
+<dd><input name="name" type="text" value=<%=name %> ></dd>
+<dt>住所*：</dt>
+<dd><input name="address" type="text" value=<%=address %> ></dd>
+<dt>電話番号：</dt>
+<dd><input name="tel" type="tel" maxlength="13" value=<%=tel %>></dd>
+<dt>カテゴリー：</dt>
+<dd><select name="categoryid" >
 <%
 while(rs.next()){
 %>
 <option value="<%=rs.getString("categoryid")%>"><%=rs.getString("categoryname")%></option>
 <%} %>
-</select><br/>
+</select></dd>
+</dl>
 <%if(errmsg != null){ %>
 <%=errmsg%><br/>
 <%} %>
+<div class="button_wrapper">
 <INPUT name="id" type="hidden" value=<%=id%>>
 <input type="submit" value="確認"/>
 <button type="submit" formaction="ListBL">戻る</button>
+</div>
 </form>
 </body>
 </html>

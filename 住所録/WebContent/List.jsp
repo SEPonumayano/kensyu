@@ -22,9 +22,9 @@ ResultSet rs= (ResultSet) request.getAttribute("rs");
 <title>住所録一覧</title>
 </head>
 <body>
-<h1>住所録管理システム：住所録一覧</h1><br/>
+<p>住所録管理システム：住所録一覧</p><br/>
 <br/>
-<div>
+<div class="box">
 <form action="Add.jsp" method="get">
 <input type="submit" value="新規登録" />
 </form>
@@ -34,17 +34,6 @@ ResultSet rs= (ResultSet) request.getAttribute("rs");
 </form>
 </div>
 <br/>
-<a href="ListBL?Page=1"><%="<<"%></a>
-<a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
-<%
-  for(int j=1;j<=maxPage;j++){
-%>
-<a href="ListBL?Page=<%=j%>"><%=j%></a>
-<%
-}
-%>
-<a href="ListBL?Page=<%=now+1%>"><%=">"%></a>
-<a href="ListBL?Page=<%=maxPage%>"><%=">>"%></a>
 <br/>
 <table border="1">
 <tr>
@@ -84,18 +73,242 @@ String tel1 = m.replaceAll("$1-$2-$3");
   }
 %>
 </table>
+
+
+<!-- ページング -->
 <form action="ListBL" method="get">
-<a href="ListBL?Page=1"><%="<<"%></a>
-<a href="ListBL?Page=<%=now-1%>"><%="<"%></a>
 <%
-  for(int j=1;j<=maxPage;j++){
+//1ページのみ
+if(maxPage==1){
 %>
-<a href="ListBL?Page=<%=j%>"><%=j%></a>
+＜＜
+|
+＜
+
+1
+
+＞
+|
+＞＞
+
 <%
-}
+//2ページ分、1ページ目
+}else if(maxPage==2 && now==1){
 %>
-<a href="ListBL?Page=<%=now+1%>"><%=">"%></a>
-<a href="ListBL?Page=<%=maxPage%>"><%=">>"%></a>
+＜＜
+|
+＜
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//2ページ分、最終ページ
+}else if(maxPage==2 && now==maxPage){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+<%=now %>
+＞
+|
+＞＞
+
+
+<%
+//3ページ分、1ページ目
+}else if(maxPage==3 && now==1){
+%>
+＜＜
+|
+＜
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+2%>"><%=now+2%></a>
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//3ページ分、2ページ目
+}else if(maxPage==3 && now==2){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%="1"%></a>
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//3ページ分、最終ページ
+}else if(maxPage==3 && now==maxPage){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+<a href="ListBL?Page=<%=now-2%>"><%=now-2%></a>
+<%=now %>
+＞
+|
+＞＞
+
+<%
+//4ページ分、1ページ目
+}else if(maxPage==4 && now==1){
+%>
+＜＜
+|
+＜
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+2%>"><%=now+2%></a>
+<a href="ListBL?Page=<%=now+3%>"><%=now+3%></a>
+
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//4ページ分、2ページ目
+}else if(maxPage==4 && now==2){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%="1"%></a>
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+2%>"><%=now+2%></a>
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%//4ページ分、3ページ目
+}else if(maxPage==4 && now==3){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+<a href="ListBL?Page=<%=now-2%>"><%=now-2%></a>
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//4ページ分、最終ページ
+}else if(maxPage==4 && now==maxPage){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-3%>"><%=now-3%></a>
+<a href="ListBL?Page=<%=now-2%>"><%=now-2%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+
+<%=maxPage %>
+
+＞
+|
+＞＞
+
+<%
+//複数ページ5以上、1ページ目
+}else if(maxPage>4 && now==1){
+%>
+＜＜
+|
+＜
+
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+2%>"><%=now+2%></a>
+<a href="ListBL?Page=<%=now+3%>"><%=now+3%></a>
+<a href="ListBL?Page=<%=now+4%>"><%=now+4%></a>
+
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//複数ページ5以上、2ページ目
+}else if(maxPage>4 && now==2){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-1%>"><%="1"%></a>
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+2%>"><%=now+2%></a>
+<a href="ListBL?Page=<%=now+3%>"><%=now+3%></a>
+
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+
+<%
+//複数ページ5以上最後から2ページ目
+}else if(maxPage>4 && now ==maxPage-1){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+
+<a href="ListBL?Page=<%=now-3%>"><%=now-3%></a>
+<a href="ListBL?Page=<%=now-2%>"><%=now-2%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+<%=now %>
+<a href="ListBL?Page=<%=now-1%>"><%=now+1%></a>
+
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+<%
+//複数ページ5以上最後のページ
+}else if(maxPage>4 && now == maxPage){
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+<a href="ListBL?Page=<%=now-4%>"><%=now-4%></a>
+<a href="ListBL?Page=<%=now-3%>"><%=now-3%></a>
+<a href="ListBL?Page=<%=now-2%>"><%=now-2%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+
+<%=maxPage %>
+
+＞
+|
+＞＞
+<%
+}else{
+%>
+<a href="ListBL?Page=1"><%="＜＜"%></a>
+|
+<a href="ListBL?Page=<%=now-1%>"><%="＜"%></a>
+
+<a href="ListBL?Page=<%=now-2%>"><%=now-2%></a>
+<a href="ListBL?Page=<%=now-1%>"><%=now-1%></a>
+<%=now %>
+<a href="ListBL?Page=<%=now+1%>"><%=now+1%></a>
+<a href="ListBL?Page=<%=now+2%>"><%=now+2%></a>
+
+<a href="ListBL?Page=<%=now+1%>"><%="＞"%></a>
+|
+<a href="ListBL?Page=<%=maxPage%>"><%="＞＞"%></a>
+<%} %>
 </form>
 <form action="Add.jsp" method="get">
 <input type="submit" value="新規登録" />

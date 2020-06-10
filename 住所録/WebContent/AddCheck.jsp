@@ -24,17 +24,19 @@ String categoryname=dd.getCategoryName();
 </head>
 <body>
 <form action="AddComitBL" method="post">
-住所録管理システム：住所録登録<br/><br/>
+<p>住所録管理システム：住所録登録</p><br/><br/>
 名前：<%=name%><br/>
 住所：<%=address%><br/>
 電話番号：<%=tel%><br/>
 カテゴリー：<%=categoryname %><br/>
+<div class="button_wrapper">
 <INPUT name="name" type="hidden" value=<%=name%>>
 <INPUT name="address" type="hidden" value=<%=address%>>
 <INPUT name="tel" type="hidden" value=<%=tel%>>
 <INPUT name="categoryid" type="hidden" value=<%=categoryid%>>
 <input type="submit" value="完了"/>
 <button type="submit" formaction="Add.jsp">戻る</button>
+</div>
 </form>
 
 </body>

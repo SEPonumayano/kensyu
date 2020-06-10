@@ -12,29 +12,38 @@ rs=de.getCategoryAll();
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/NewFile.css" type="text/css">
+<link rel="stylesheet" href="NewFile.css">
 <title>住所録登録</title>
 </head>
 <body>
-<form class="from" action="AddBL" method="post">
-<h1>住所録管理システム：住所録登録</h1><br/>
-<div class="input">
-<div class="item">名前*：<input name="name" type="text" value="" /></div>
-<div class="item">住所*：<input name="address" type="text" value="" /></div>
-<div class="item">電話番号：<input name="tel" type="tel" maxlength="13" value=""/></div>
-<div class="item">カテゴリー：<select name="categoryid">
+<div id="site-box">
+<p>住所録管理システム：住所録登録</p>
+<form class="item" action="AddBL" method="post">
+<dl>
+<dt>名前*：</dt>
+<dd><input name="name" type="text" value="" style="width:150px"></dd>
+<dt>住所*：</dt>
+<dd><input name="address" type="text" value="" style="width:300px"></dd>
+<dt>電話番号：</dt>
+<dd><input name="tel" type="tel" maxlength="13" value=""style="width:150px"></dd>
+<dt>カテゴリー：</dt>
+<select>
 <%
 while(rs.next()){
 %>
 <option value="<%=rs.getString("categoryid")%>"><%=rs.getString("categoryname")%></option>
 <%} %>
-</select></div>
+</select>
+</dl>
 <%if(errmsg != null){ %>
 <%=errmsg%><br/>
 <%} %>
-</div>
+<br/>
+<div class="button_wrapper">
 <input type="submit" value="確認"/>
 <button type="submit" formaction="ListBL">戻る</button>
+</div>
 </form>
+</div>
 </body>
 </html>

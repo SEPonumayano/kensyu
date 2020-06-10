@@ -51,15 +51,16 @@ public class DeleteComitBL extends HttpServlet {
 		try {
 			String user="root";
 	        String password ="";
-	        String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+	        //String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+	        String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
 
 
 	        Class.forName("com.mysql.jdbc.Driver");
 	        con=DriverManager.getConnection( url,user,password);
 	        Statement stmt = con.createStatement();
 
-			String UpdQuery="update jyusyoroku SET delete_flg=1 where id='"+id+"'";
-			//String UpdQuery="update onuma.jyusyoroku SET delete_flg=1 where id='"+id+"'"
+			//String UpdQuery="update jyusyoroku SET delete_flg=1 where id='"+id+"'";
+			String UpdQuery="update onuma.jyusyoroku SET delete_flg=1 where id='"+id+"'";
 	        stmt.executeUpdate(UpdQuery);
 		    System.out.println("テーブルを消去しました。<br>");
 
