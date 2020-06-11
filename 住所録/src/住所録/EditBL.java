@@ -41,20 +41,27 @@ public class EditBL extends HttpServlet {
         String address = request.getParameter("address");
         String tel =request.getParameter("tel");
         String categoryid=request.getParameter("categoryid");
+        //String categoryname=request.getParameter("categoryname");
         String id = request.getParameter("id");
         ArrayList<String> errmsg;
+        
+       // System.out.println(categoryid);
 
 		Common deta =new Common();
 
 		deta.SetName(name);
 		deta.SetAddress(address);
 		deta.SetTel(tel);
+		deta.SetCategoryid(categoryid);
 
 		name=deta.GetName();
         address=deta.GetAddress();
         tel=deta.GetTel();
+        categoryid=deta.GetCategoryid();
 
         errmsg=deta.getErr(name,address,tel);
+        
+        System.out.println(categoryid);
 
         if(errmsg.isEmpty()) {
         	System.out.println(errmsg);

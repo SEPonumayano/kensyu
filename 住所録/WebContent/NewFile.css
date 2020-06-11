@@ -6,25 +6,80 @@ body{
 
 p{
 	font-size:20px;
-	color:#ff6c94;
+	
 }
 
-form{
-	padding:30px 50px;
+.item{
+	padding:10px 50px;
 }
 
-form dl dt{
+.item dl dt{
 	width:90px;
 	/* padding:10px 0; */
 	float:left;
 	/* clear:both; */
 }
 
-form dl dd{
+.item dl dd{
 	/* padding:10px 0; */
 }
 
+.menu{
+	display:flex;
+	justify-content:space-between;
+}
+
+#sss{
+	display: flex;
+	flex-direction:column;
+}
+
+.bbb{
+	float:left;
+}
+
+th,tb{
+	border: solid 1px;
+	align:center;
+}
+
+table{
+	border-collapse: collapse;
+	width:950px;
+}
+
+th{
+	width:200px;
+	height:20px;
+}
+
+.no{
+	width:3%;
+}
+.name{
+	width:18%;
+}
+.address{
+	width:40%
+}
+.tel{
+	width:18%;
+}
+.cate{
+	width:10%
+	
+}
+
+.re{
+	width:11%
+}
+
+.err{
+	color:#de4d4d;
+}
+
 .button_wrapper{
-	text-align:center;
+	text-align:left;
+	padding:0px 90px;
 	
 }

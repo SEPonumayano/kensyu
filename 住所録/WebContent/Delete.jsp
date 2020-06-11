@@ -17,9 +17,10 @@ String categoryid=(String)request.getParameter("categoryid");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="NewFile.css">
-<title>Insert title here</title>
+<title>住所録削除</title>
 </head>
 <body>
+<div id="site-box">
 <p>住所録管理システム：住所録削除</p>
 <form  class="item" action="DeleteComitBL" method="post">
 <dl>
@@ -30,13 +31,15 @@ String categoryid=(String)request.getParameter("categoryid");
 <dt>電話番号:</dt>
 <dd><%=tel%></dd>
 <dt>カテゴリー:</dt>
-<dd><%=categoryid%></dd>
+<dd><%=categoryname%></dd>
 </dl>
+<br/>
 <div class="button_wrapper">
 <INPUT name="id" type="hidden" value=<%=id%>>
-<input type="submit" value="OK"/>
-<button type="submit" formaction="ListBL">戻る</button>
+<input type="submit" value="OK" style="width:250px;height:20px;">
+<button type="submit" formaction="ListBL" style="width:250px;height:20px;">戻る</button>
 </div>
 </form>
+</div>
 </body>
 </html>
