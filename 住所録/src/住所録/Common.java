@@ -56,13 +56,13 @@ public class Common {
 	public ArrayList<String> getErr(String name,String address,String tel) {
 		ArrayList<String> returnVal =new ArrayList<String>();
 
-		if(this.name.length()>=20) {
+		if(this.name.length()>20) {
 			returnVal.add(ERRMSG_NAME01);
 		}
 		if(this.name.isEmpty()) {
 			returnVal.add(ERRMSG_NAME02);
 		}
-		if(this.address.length()>=40) {
+		if(this.address.length()>40) {
 			returnVal.add(ERRMSG_ADDRESS01);
 		}
 		if(this.address.isEmpty()) {
@@ -82,8 +82,8 @@ public class Common {
 
         String user="root";
         String password ="";
-        String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
-        //String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
+        //String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+        String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
 
 		try {
 	        Class.forName("com.mysql.jdbc.Driver");
@@ -91,8 +91,8 @@ public class Common {
 	        Statement stmt = connect.createStatement();
 	        System.out.println("接続おｋ");
 
-	        String getQuery = "SELECT * FROM testdb.catego";
-	        //String getQuery = "SELECT * FROM onuma.category";
+	        //String getQuery = "SELECT * FROM testdb.catego";
+	        String getQuery = "SELECT * FROM onuma.category";
 	        //PreparedStatement ps =connect.prepareStatement(getQuery);
 	        rs =stmt.executeQuery(getQuery);
 	        //ps.close();
@@ -113,8 +113,8 @@ public class Common {
 
         String user="root";
         String password ="";
-        String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
-        //String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
+        //String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+        String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
 
 		try {
 	        Class.forName("com.mysql.jdbc.Driver");
@@ -124,8 +124,8 @@ public class Common {
 
 	        String keyword=this.categoryid;
 
-	        String getQuery = "SELECT categoryname FROM testdb.catego WHERE categoryid IN('"+keyword+"')";
-	        //String getQuery = "SELECT categoryname FROM onuma.category WHERE categoryid IN('"+keyword+"')";
+	        //String getQuery = "SELECT categoryname FROM testdb.catego WHERE categoryid IN('"+keyword+"')";
+	        String getQuery = "SELECT categoryname FROM onuma.category WHERE categoryid IN('"+keyword+"')";
 	        PreparedStatement ps =connect.prepareStatement(getQuery);
 	        rs =ps.executeQuery();
 	        rs.next();

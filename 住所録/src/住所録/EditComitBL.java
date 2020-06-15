@@ -57,16 +57,16 @@ public class EditComitBL extends HttpServlet {
 		try {
 			String user="root";
 	        String password ="";
-	        String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
-	        //String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
+	        //String url ="jdbc:mysql://localhost/testdb?serverTimezone=JST";
+	        String url = "jdbc:mysql://localhost/onuma?serverTimezone=JST";
 
 
 	        Class.forName("com.mysql.jdbc.Driver");
 	        con=DriverManager.getConnection( url,user,password);
 	        Statement stmt = con.createStatement();
 
-	        String UpdQuery="update testdb.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0 WHERE id='"+id+"'";
-	        //String UpdQuery="update onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0 WHERE id='"+id+"'";
+	        //String UpdQuery="update testdb.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0 WHERE id='"+id+"'";
+	        String UpdQuery="update onuma.jyusyoroku SET name='"+name+"',address='"+address+"',tel='"+tel1+"',categoryid='"+categoryid+"',delete_flg=0 WHERE id='"+id+"'";
 	        stmt.executeUpdate(UpdQuery);
 		    System.out.println("テーブルを更新しました。");
 
