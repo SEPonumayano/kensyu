@@ -7,7 +7,7 @@ String name=(String)request.getParameter("name");
 String address=(String)request.getParameter("address");
 String tel=(String)request.getParameter("tel");
 String categoryname=(String)request.getParameter("categoryname");
-String categoryid=(String)request.getParameter("categoryid");
+String categoryid=request.getParameter("categoryid");
 
 List<String> errmsg =(List<String>) request.getAttribute("errmsg");
 Common dee =new Common();
@@ -34,12 +34,17 @@ rs=dee.getCategoryAll();
 <dd><input name="tel" type="tel" maxlength="13" value="<%=tel %>" style="width:250px"></dd>
 <dt>カテゴリ：</dt>
 <dd><select name="categoryid" >
-<option value="<%=categoryid%>"><%=categoryname %></option>
 <%
 while(rs.next()){
+	if(rs.getString("categoryid").equals(categoryid)){
+%>
+<option value="<%=rs.getString("categoryid")%>" selected><%=rs.getString("categoryname")%></option>
+<%
+	}else{
 %>
 <option value="<%=rs.getString("categoryid")%>"><%=rs.getString("categoryname")%></option>
-<%} %>
+<%} 
+}%>
 </select></dd>
 </dl>
 <br/>

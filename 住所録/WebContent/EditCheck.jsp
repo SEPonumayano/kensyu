@@ -33,6 +33,11 @@ String categoryname=dd.getCategoryName();
 <dd><%=address%></dd>
 <dt>電話番号：</dt>
 <dd><%=tel%><dd>
+<%if(tel.isEmpty()){ 
+%><br/>
+<%
+}
+%>
 <dt>カテゴリ：</dt>
 <dd><%=categoryname%></dd>
 </dl>
@@ -43,8 +48,9 @@ String categoryname=dd.getCategoryName();
 <INPUT name="tel" type="hidden" value=<%=tel%>>
 <INPUT name="categoryid" type="hidden" value=<%=categoryid%>>
 <INPUT name="id" type="hidden" value=<%=id%>>
-<button type="submit" formaction="Edit.jsp" style="width:250px;height:20px;">戻る</button>
 <input type="submit" value="編集" style="width:250px;height:20px;">
+<button type="submit" formaction="Edit.jsp" style="width:250px;height:20px;">戻る</button>
+
 </div>
 </form>
 </div>
